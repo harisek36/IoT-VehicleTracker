@@ -65,5 +65,16 @@ public class Vehicle {
         this.lastServiceDate = lastServiceDate;
     }
 
-
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vin='" + vin + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year='" + year + '\'' +
+                ", redlineRpm=" + redlineRpm +
+                ", maxFuelVolume=" + maxFuelVolume +
+                ", lastServiceDate='" + lastServiceDate + '\'' +
+                '}';
+    }
 }
