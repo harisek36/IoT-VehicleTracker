@@ -1,7 +1,4 @@
 package com.harishSekar.entity;
-import javax.persistence.Entity;
-
-@Entity
 public class Readings {
 
         String vin;
@@ -15,6 +12,17 @@ public class Readings {
         boolean engineCoolantLow;
         boolean cruiseControlOn;
         double engineRpm;
+        TirePressure tirePressure;
+
+
+
+    public TirePressure getTirePressure() {
+        return tirePressure;
+    }
+
+    public void setTirePressure(TirePressure tirePressure) {
+        this.tirePressure = tirePressure;
+    }
 
     public String getVin() {
         return vin;

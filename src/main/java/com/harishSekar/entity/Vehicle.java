@@ -1,13 +1,23 @@
 package com.harishSekar.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQueries({@NamedQuery(name = "Vehicle.findAll",query = "SELECT vehicle FROM Vehicle vehicle")})
+
 public class Vehicle {
 
-    String vin;
-    String make;
-    String model;
-    String year;
-    double redlineRpm;
-    double maxFuelVolume;
-    String lastServiceDate;
+    @Id
+    private String vin;
+    private String make;
+    private String model;
+    private int year;
+    private int redlineRpm;
+    private int maxFuelVolume;
+    private String lastServiceDate;
 
     public String getVin() {
         return vin;
@@ -33,11 +43,11 @@ public class Vehicle {
         this.model = model;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -45,7 +55,7 @@ public class Vehicle {
         return redlineRpm;
     }
 
-    public void setRedlineRpm(double redlineRpm) {
+    public void setRedlineRpm(int redlineRpm) {
         this.redlineRpm = redlineRpm;
     }
 
@@ -53,7 +63,7 @@ public class Vehicle {
         return maxFuelVolume;
     }
 
-    public void setMaxFuelVolume(double maxFuelVolume) {
+    public void setMaxFuelVolume(int maxFuelVolume) {
         this.maxFuelVolume = maxFuelVolume;
     }
 
@@ -77,4 +87,7 @@ public class Vehicle {
                 ", lastServiceDate='" + lastServiceDate + '\'' +
                 '}';
     }
+
+
+
 }

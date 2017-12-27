@@ -6,6 +6,7 @@ import com.harishSekar.exceptions.BadRequestException;
 import com.harishSekar.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ public class VechileService implements VehicleServiceModel {
     @Autowired
     VehicleRepositoryModel vehicleRepository;
 
+    @Transactional(readOnly = true)
     public List<Vehicle> findAllVehicles() {
         return vehicleRepository.findAllVehicles();
     }
 
+    @Transactional(readOnly = true)
     public Vehicle findVehicleById(String vin) {
         Vehicle vehicle = vehicleRepository.findVehicleById(vin);
 
@@ -28,28 +31,31 @@ public class VechileService implements VehicleServiceModel {
         return vehicle;
     }
 
+    @Transactional
     public Vehicle createVehicle(Vehicle vehicle) {
-        Vehicle vehicle_ = vehicleRepository.findVehicleById(vehicle.getVin());
-        if(vehicle_ != null){
-            throw new BadRequestException("Vehicle with VIM: "+ vehicle_.getVin()+" already exists");
+        Vehicle vehicle_existing = vehicleRepository.findVehicleById(vehicle.getVin());
+        if(vehicle_existing != null){
+            throw new BadRequestException("Vehicle with VIM: "+ vehicle_existing.getVin()+" already exists");
         }
 
         return vehicleRepository.createVehicle(vehicle);
     }
 
+    @Transactional
     public Vehicle updateVehicle(String vin, Vehicle vehicle) {
-        Vehicle vehicle_ = vehicleRepository.findVehicleById(vin);
-        if(vehicle_ == null){
+        Vehicle vehicle_existing = vehicleRepository.findVehicleById(vin);
+        if(vehicle_existing == null){
             // throw 404
         }
-        return vehicleRepository.updateVehicle(vin,vehicle);
+        return vehicleRepository.updateVehicle(vehicle);
     }
 
+    @Transactional
     public void deleteVehicle(String vin) {
         Vehicle vehicle_ = vehicleRepository.findVehicleById(vin);
         if(vehicle_ == null){
             // throw 400
         }
-        vehicleRepository.deleteVehicle(vin);
+        vehicleRepository.deleteVehicle(vehicle_);
     }
 }

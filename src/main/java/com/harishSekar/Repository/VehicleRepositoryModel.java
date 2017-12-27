@@ -13,8 +13,8 @@ public interface VehicleRepositoryModel {
 
     Vehicle createVehicle(Vehicle vehicle);
 
-    Vehicle updateVehicle(String vin,Vehicle vehicle);
+    Vehicle updateVehicle(Vehicle vehicle);
 
-    void deleteVehicle(String vin);
+    void deleteVehicle(Vehicle vehicle);
 
 }
